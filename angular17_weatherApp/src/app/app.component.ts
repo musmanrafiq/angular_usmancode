@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { WeatherService} from './services/weather-service';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,17 @@ export class AppComponent {
 
   title = 'angular17_weatherApp';
   searchQuery : string = '';
-  results: string = '';
+  weatherDetail: string = '';
+
+  constructor(private weatherService: WeatherService){}
 
   searchWeather = () => {
-    this.results = "Weather details."
+    this.weatherDetail = "Weather details."
+
+    this.weatherService.get().subscribe((results) => {
+      console.log(results)
+
+      this.weatherDetail = `Its ${results.weather[0].main} and overall its ${results.weather[0].description}`
+    });
   }
 }
