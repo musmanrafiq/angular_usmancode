@@ -21,10 +21,10 @@ export class AppComponent {
   searchWeather = () => {
     this.weatherDetail = "Weather details."
 
-    this.weatherService.get().subscribe((results) => {
+    this.weatherService.get(this.searchQuery).subscribe((results) => {
       console.log(results)
 
-      this.weatherDetail = `Its ${results.weather[0].main} and overall its ${results.weather[0].description}`
+      this.weatherDetail = `Its ${results.main} and overall its ${results.description}`
     });
   }
 }
